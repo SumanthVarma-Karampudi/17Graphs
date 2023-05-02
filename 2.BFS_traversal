@@ -10,7 +10,11 @@ void BFS(int **edges, int n, int sv)
   pendingvertices.push(sv);
   while(!pendingvertices.empty())
   {
-     int currentvertex=pendingvertices.pop();  
+     int currentvertex=pendingvertices.pop(); 
+     cout<<currentvertex<<endl;
+     for(int i=0;i<n;i++)
+     {
+      if(edges[
   }  
 }
 
