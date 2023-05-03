@@ -120,11 +120,4 @@ int main()
   delete [] edges;
 }
   
-  //free memory or delete space
-  delete  [] visited;
-  for(int i=0;i<n;i++)
-  { 
-    delete [] edges[i];
-  }
-  delete [] edges;
-}
+ 
