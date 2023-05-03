@@ -1,0 +1,22 @@
+int main(){
+    int n,e;
+    cin>>n>>e;
+    bool **edges=new *[n];
+    for(int i=0;i<n;i++){
+        edges[i]=new bool[n];
+    }
+
+    for(int i=0;i<n;i++){
+        int start,end;
+        cin>>start>>end;
+        edges[start][end]=true;
+        edges[end][start]=true;
+    }
+    
+    cout<<(HasPath(edges,)
+    
+    for(int i=0;i<n;i++){
+        delete [] edges[i];
+    }
+    delete [] edges;
+}
