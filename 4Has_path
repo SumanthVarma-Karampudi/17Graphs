@@ -24,3 +24,52 @@ int main(){
     }
     delete [] edges;
 }
+
+
+
+#include<iostream>
+#include<queue>
+using namespace std;
+
+bool HaspathHelper(int **edges, int n, int start, int end, bool* visited){
+    if(start==end){
+        return true;
+    }
+    visited[start]=true;
+    for(int i=0;i<n;i++){
+        if(edges[start][i])
+    }
+}
+
+bool Haspath(int **edges, int n, int start, int end){
+    bool* visited=new bool[];
+    return HaspathHelper(edges, n, start, end, visited);
+    delete [] visited;
+}
+
+int main(){
+    int n,e;
+    cin>>n>>e;
+    bool **edges=new *[n];
+    for(int i=0;i<n;i++){
+        edges[i]=new bool[n];
+    }
+
+    for(int i=0;i<n;i++){
+        int start,end;
+        cin>>a>>end;
+        cin>>b>>end;
+        edges[a][b]=true;
+        edges[b][a]=true;
+    }
+    
+    int start,end;
+    cin>>start>>end;
+    
+    cout<<(Haspath(edges,n,start,end) ? "true": "false";
+    
+    for(int i=0;i<n;i++){
+        delete [] edges[i];
+    }
+    delete [] edges;
+}
