@@ -1,3 +1,34 @@
+*/
+vector<int>* getPathHelper(int** edges, int n, int sv, int ev, bool* visited){
+  if(sv==ev){
+    vector<int>* output= new vector<int>();
+    output->push_back(ev);
+    return output;
+  }
+  visited[sv]=true;
+  for(int i=0;i<n;i++){
+    if(edges[sv][i] && !visited[i]){
+      vector<int>* smallOutput=getPathHelper(edges,n,i,ev,visited);
+      if(smallOutput != NULL){
+        smallOutput->push_back(sv);
+        return smallOutput;
+      }
+    }
+  }
+  return NULL;
+}
+  
+vector<int>* getpath(int** edges, int n, int sv, int ev){
+  bool* visited=new bool[n];
+  for(int i=0;i<n;i++){
+    visited[i]=false;
+  }
+  vector<int>* output=getPathHelper(edges, n, sv, ev, visited);
+  delete [] visited;
+  return output;
+}
+/*
+
 output for getpathDFS:
 4 - no.of vertices
 4 - no.of edges
