@@ -1,0 +1,63 @@
+#include<iostream>
+using namespace std;
+
+void DFS(bool** graph, int n, bool* visited, int curr){
+    visited[curr]=true;
+    
+    for(int i=0;i<n;i++){
+        if(graph[curr][i] && !visited[i]){
+            DFS(graph, n, visited, i);
+        }
+    }
+}
+
+bool isConnected(bool** graph, int n){
+    bool* visited=new bool[n];
+    DFS(graph, n, visited, 0);
+    
+    for(int i=0;i<n;i++){
+        if(!visited[i]){
+            return false;
+        }
+    }
+    return true;
+}
+
+int main(){
+    int n,e;
+    cin>>n>>e;
+    
+    bool** graph=new bool*[n];
+    for(int i=0;i<n;i++){
+        graph[i] = new bool[n];
+    }
+    
+    for(int i=0;i<e;i++){
+        int first,second;
+        cin>>first>>second;
+        graph[first][second]=true;
+        graph[second][first]=true;
+    }
+    
+    cout<<(isConnected(graph,n)? "true":"false");
+    
+    for(int i=0;i<n;i++){
+        delete [] graph[i];
+    }
+    delete [] graph;
+    
+}
+
+output:
+1)4 -n
+  3 -edges  
+    0 1
+    0 2
+    2 3
+  =>True
+2)4 -n
+  3 -edges  
+    0 1
+    0 2
+    1 2
+  =>false
