@@ -1,0 +1,241 @@
+/*
+vector<int>* getpathBFS(int** edges, int n, int sv, int ev){
+    queue<int> bfsQ;
+    bool* visited=new bool[n];
+    for(int i=0;i<n;i++){
+        visited[i]=false;
+    }
+    bfsQ.push(sv);
+    visited[sv]=true;
+    bool done = false;
+    unordered_map<int, int> parent;
+    while(!bfsQ.empty() && !done){
+        int front=bfsQ.front();
+        bfsQ.pop();
+        for(int i=0;i<n;i++){
+            if(edges[front][i] && !visited[i]){
+                parent[i]=front;
+                bfsQ.push(i);
+                visited[i]=true;
+                if(i==ev){
+                    done=true;
+                    break;
+                }
+            }
+        }
+    }
+    
+    delete [] visited;
+    if(!done){
+        return NULL;
+    }
+    else{
+        vector<int>* output=new vector<int>();
+        int current=ev;
+        output->push_back(ev);
+        while(current != sv){
+            current=parent[current];
+            output->push_back(current);
+        }
+        return output;
+    }
+}
+*/
+
+#include<iostream>
+using namespace std;
+#include<queue>
+#include<unordered_map>
+
+void printBFS(int **edges, int n, int sv, bool* visited){
+    queue<int> pendingvertices;
+    pendingvertices.push(sv);
+    while(!pendingvertices.empty()){
+        int currentvertex=pendingvertices.front();
+        pendingvertices.pop();
+        cout<<currentvertex<<endl;
+        visited[sv]=true;
+        for(int i=0;i<n;i++){
+            if(i==currentvertex){
+                continue;
+            }
+            if(edges[currentvertex][i]==1 && !visited[i]){
+                pendingvertices.push(i);
+                visited[i]=true;
+            }
+        }
+    }
+}
+
+void printDFS(int** edges, int n, int sv, bool* visited){
+  cout << sv << endl;
+  visited[sv] = true;
+  for(int i=0; i<n; i++)
+  {
+    if(i==sv)
+      continue;
+    if(edges[sv][i]==1)
+    {
+      if(visited[i])
+        continue;
+      printDFS(edges, n, i, visited);
+    }
+  }
+}
+
+void BFS(int **edges, int n)
+{
+  bool *visited=new bool[n];
+  for(int i=0;i<n;i++)
+  {
+    visited[i]=false;
+  }
+  for(int i=0;i<n;i++)
+  {
+    if(!visited[i])
+      printBFS(edges,n,i,visited);
+  }
+  delete [] visited;
+}
+
+
+
+
+void DFS(int **edges, int n)
+{
+  bool *visited=new bool[n];
+  for(int i=0;i<n;i++)
+  {
+    visited[i]=false;
+  }
+  for(int i=0;i<n;i++)
+  {
+    if(!visited[i])
+      printDFS(edges,n,i,visited);
+  }
+  delete [] visited;
+}
+
+
+
+vector<int>* getPathHelperDFS(int** edges, int n, int sv, int ev, bool* visited){
+  if(sv==ev){
+    vector<int>* output= new vector<int>();
+    output->push_back(ev);
+    return output;
+  }
+  visited[sv]=true;
+  for(int i=0;i<n;i++){
+    if(edges[sv][i] && !visited[i]){
+      vector<int>* smallOutput=getPathHelperDFS(edges,n,i,ev,visited);
+      if(smallOutput != NULL){
+        smallOutput->push_back(sv);
+        return smallOutput;
+      }
+    }
+  }
+  return NULL;
+}
+  
+vector<int>* getpathDFS(int** edges, int n, int sv, int ev){
+  bool* visited=new bool[n];
+  for(int i=0;i<n;i++){
+    visited[i]=false;
+  }
+  vector<int>* output=getPathHelperDFS(edges, n, sv, ev, visited);
+  delete [] visited;
+  return output;
+}
+
+vector<int>* getpathBFS(int** edges, int n, int sv, int ev){
+    queue<int> bfsQ;
+    bool* visited=new bool[n];
+    for(int i=0;i<n;i++){
+        visited[i]=false;
+    }
+    bfsQ.push(sv);
+    visited[sv]=true;
+    bool done = false;
+    unordered_map<int, int> parent;
+    while(!bfsQ.empty() && !done){
+        int front=bfsQ.front();
+        bfsQ.pop();
+        for(int i=0;i<n;i++){
+            if(edges[front][i] && !visited[i]){
+                parent[i]=front;
+                bfsQ.push(i);
+                visited[i]=true;
+                if(i==ev){
+                    done=true;
+                    break;
+                }
+            }
+        }
+    }
+    
+    delete [] visited;
+    if(!done){
+        return NULL;
+    }
+    else{
+        vector<int>* output=new vector<int>();
+        int current=ev;
+        output->push_back(ev);
+        while(current != sv){
+            current=parent[current];
+            output->push_back(current);
+        }
+        return output;
+    }
+}
+
+int main(){
+  int n;
+  int e;
+  cin >> n >> e;
+
+  int** edges = new int*[n];
+  for(int i=0; i<n; i++){
+    edges[i]=new int[n];
+    for(int j=0; j<n; j++){
+      edges[i][j]=0;
+    }
+  }
+
+  for(int i=0; i<e; i++){
+      
+    int f,s;
+    cin >> f >> s;
+    edges[f][s]=1;
+    edges[s][f]=1;
+  }
+  
+  cout<<"BFS"<<endl;
+  BFS(edges, n);
+  cout<<"DFS"<<endl;
+  DFS(edges, n);
+ 
+  
+  int sv,ev;
+  cin>>sv>>ev;
+  vector<int>* output=getpathBFS(edges, n, sv, ev);
+  if(output!=NULL){
+      cout<<"Printing Path"<<endl;
+      for(int i=0;i<output->size();i++){
+          cout<<output->at(i);
+      }
+      delete output;
+  }
+  else{
+      cout<<"Has No Path";
+  }
+  
+  
+  // Delete all the memory
+  for(int i=0;i<n;i++)
+  { 
+    delete [] edges[i];
+  }
+  delete [] edges;
+  return 0;
+} 
