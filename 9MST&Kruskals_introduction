@@ -1,0 +1,10 @@
+Spanning tree:
+-> Tree is a graph, which is connected and should not contain any cycles
+Spanning tree is simply a tree containing all vertices of a graph but not necessarily all edges of that particular graph.
+
+==>In a Graph            no.of vertices = N  and no.of edges = E
+==>In a Spanning Tree     no.of vertices = N  and no.of edges = N-1
+MST - Minimum Spanning Tree
+
+Kruskal's algorithm:
+Connect the vertices by consider weights of the edges in the ascending order if and only if it doesn't form a cycle.
