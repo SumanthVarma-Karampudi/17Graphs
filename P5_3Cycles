@@ -1,0 +1,56 @@
+#include<iostream>
+using namespace std;
+
+int getCycles(bool** graph, int n){
+    int cycleCount=0;
+    
+    for(int i=0;i<n-2;i++){
+        for(int j=i+1;j<n-1;j++){
+            for(int k=j+1;k<n;k++){
+                if(graph[i][j] && graph[j][k] && graph[i][k]){
+                    cycleCount++;
+                }
+            }
+        }
+    }
+    return cycleCount;
+}
+
+int main(){
+    int n,e;
+    cin>>n>>e;
+    
+    bool** graph=new bool*[n];
+    for(int i=0;i<n;i++){
+        graph[i] = new bool[n];
+    }
+    
+    for(int i=0;i<e;i++){
+        int first,second;
+        cin>>first>>second;
+        graph[first][second]=true;
+        graph[second][first]=true;
+    }
+    
+    cout<<getCycles(graph, n);
+    
+    for(int i=0;i<n;i++){
+        delete [] graph[i];
+    }
+    delete [] graph;
+    
+}
+
+Input:
+6 9(no.of vertices, no.of edges)
+4 3
+4 0
+0 3
+3 1
+5 1
+5 3
+0 5
+0 2
+5 2
+output: 
+4
