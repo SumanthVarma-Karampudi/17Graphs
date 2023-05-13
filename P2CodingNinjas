@@ -57,3 +57,10 @@ int main() {
 
 	cout << (hasPath(board, n, m) ? 1 : 0);
 }
+
+Sample Input 1:
+2 11
+CXDXNXNXNXA
+XOXIXGXIXJX
+Sample Output 1:
+1
