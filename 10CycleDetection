@@ -1,0 +1,8 @@
+CYCLE DETECTION:
+To check if particular edge connection forms a cycle,we need see that IF THERE IS ANOTHER PATH PRESENT TO REACH ANOTHER VERTEX WHICH WE ARE TRYING TO CONNECT.
+But time complexity high O(N+E) sometime it si O(N^2)
+
+                                        Alternate Approach for Cycle Detection:
+>>>>>>>>>>>>>UNION FIND>>>>>>>>>>>>>>>
+Intution behind the UNION FIND is that when ever we are trying to connect two components, we need to make sure that those two vertices are 
+from the different components.
