@@ -1,6 +1,6 @@
 CYCLE DETECTION:
 To check if particular edge connection forms a cycle,we need see that IF THERE IS ANOTHER PATH PRESENT TO REACH ANOTHER VERTEX WHICH WE ARE TRYING TO CONNECT.
-But time complexity high O(N+E) sometime it si O(N^2)
+But time complexity high O(N+E) sometime it is O(N^2)
 
                                         Alternate Approach for Cycle Detection:
 >>>>>>>>>>>>>UNION FIND>>>>>>>>>>>>>>>
