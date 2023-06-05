@@ -1,0 +1,6 @@
+****************************************************************EDGES***************************************************************************
+Min no.of edges in a graph: 0
+No.of edges in a connected graph: n-1 (n is the no.of vertices)
+No.of edges in a complete graph: nC2 -> n(n-1)/2
+
+Time Complexity of any graph algorithm that is based on edges is O(E) == O(n^2)
